@@ -27,19 +27,43 @@ function App() {
     iconSize: [38, 38]
   })
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true} style={{ height: "100vh", width: "100%" }}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MarkerClusterGroup>
-        {transformedData.map((item, index) => (
-          <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon}>
-            <Popup>{item.name}</Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+    <main style={{
+      height: "100vh",
+      width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <div style={{
+        height: "10vh", width: "100%", display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+        <img src="/logo.png" height={28} width={200} alt=""></img>
+      </div>
+      <MapContainer center={[24.071521, 9.615584725366856]} zoom={2} scrollWheelZoom={true} style={{ height: "90vh", width: "95%" }}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <MarkerClusterGroup>
+          {transformedData.map((item, index) => (
+            <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon}>
+              <Popup>{item.name}</Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+      <div style={{
+        height: "5vh", width: "100%", display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      }}>
+      </div>
+    </main>
   );
 }
 
