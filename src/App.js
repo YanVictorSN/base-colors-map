@@ -33,7 +33,8 @@ function App() {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center"
+      justifyContent: "center",
+      overflow: "hidden"
     }}>
       <div style={{
         height: "10vh", width: "100%", display: "flex",
@@ -41,27 +42,29 @@ function App() {
         alignItems: "center",
         justifyContent: "center"
       }}>
-        <img src="/logo.png" height={28} width={200} alt=""></img>
+        <img src="/logo.png" style={{ height: '5vh', width: 'auto' }} alt="" />
       </div>
-      <MapContainer center={[24.071521, 9.615584725366856]} zoom={2} scrollWheelZoom={true} style={{ height: "90vh", width: "95%" }}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <MarkerClusterGroup>
-          {transformedData.map((item, index) => (
-            <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon}>
-              <Popup>{item.name}</Popup>
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-      </MapContainer>
-      <div style={{
-        height: "5vh", width: "100%", display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
-      }}>
+      <div style={{ height: 'calc(100vh - 10vh)', width: '100vw', overflow: 'hidden', position: 'relative' }}>
+        <MapContainer
+          center={[24.071521, 9.615584725366856]}
+          zoom={2}
+          scrollWheelZoom={true}
+          style={{ height: '100%', width: '100%', backgroundColor: "white" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            minZoom={2}
+            maxZoom={18}
+          />
+          <MarkerClusterGroup>
+            {transformedData.map((item, index) => (
+              <Marker key={index} position={[item.latitude, item.longitude]} icon={customIcon}>
+                <Popup>{item.name}</Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+        </MapContainer>
       </div>
     </main>
   );
